@@ -1,4 +1,7 @@
 use tauri::Manager;
+use std::fs::File;
+use std::io::Write;
+
 
 // tauri::Builder::default()
   // .setup(|app| {
@@ -16,8 +19,11 @@ use tauri::Manager;
 fn greet(name: &str) -> String {
     println!("----------------------------------");
     println!("{}", name);
+    let mut file = std::fs::File::create("/Users/bytedance/Desktop/data.json").expect("create failed");
+    file.write_all(name.as_bytes()).expect("write failed");
     println!("----------------------------------");
     format!("{}", name)
+
 }
 
 fn main() {
