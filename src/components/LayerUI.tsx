@@ -206,8 +206,6 @@ const LayerUI = ({
       >
         {HamburgerMenuIcon}
       </button>
-      <button type="button" onClick={() => greet()}> Greet </button>
-      <p>HelloWorld{greetMsg}</p>
 
       {isMenuOpen && (
         <div
@@ -238,18 +236,9 @@ const LayerUI = ({
                   shortcut={getShortcutFromShortcutName("imageExport")}
                 />
               )}
-              {onCollabButtonClick && (
-                <CollabButton
-                  isCollaborating={isCollaborating}
-                  collaboratorCount={appState.collaborators.size}
-                  onClick={onCollabButtonClick}
-                />
-              )}
               {actionManager.renderAction("toggleShortcuts", undefined, true)}
               {!appState.viewModeEnabled &&
                 actionManager.renderAction("clearCanvas")}
-              <Separator />
-              <MenuLinks />
               <Separator />
               <div
                 style={{
@@ -411,14 +400,6 @@ const LayerUI = ({
               collaborators={appState.collaborators}
               actionManager={actionManager}
             />
-            {onCollabButtonClick && (
-              <CollabButton
-                isInHamburgerMenu={false}
-                isCollaborating={isCollaborating}
-                collaboratorCount={appState.collaborators.size}
-                onClick={onCollabButtonClick}
-              />
-            )}
             {renderTopRightUI?.(device.isMobile, appState)}
             {!appState.viewModeEnabled && (
               <LibraryButton appState={appState} setAppState={setAppState} />
