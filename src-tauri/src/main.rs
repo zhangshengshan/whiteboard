@@ -16,10 +16,11 @@ use std::io::Write;
 
 
 #[tauri::command]
-fn greet(name: &str) -> String {
+fn greet(name: &str, filepath: &str) -> String {
     println!("----------------------------------");
+    println!("filePath {}", filepath);
     println!("{}", name);
-    let mut file = std::fs::File::create("/Users/bytedance/Desktop/data.json").expect("create failed");
+    let mut file = std::fs::File::create(filepath).expect("create failed");
     file.write_all(name.as_bytes()).expect("write failed");
     println!("----------------------------------");
     format!("{}", name)

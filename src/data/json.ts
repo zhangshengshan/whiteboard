@@ -11,6 +11,7 @@ import { ExcalidrawElement } from "../element/types";
 import { AppState, BinaryFiles, LibraryItems } from "../types";
 import { isImageFileHandle, loadFromBlob, normalizeFile } from "./blob";
 import { invoke } from "@tauri-apps/api/tauri";
+import { save } from '@tauri-apps/api/dialog';
 
 import {
   ExportedDataState,
@@ -75,7 +76,13 @@ export const saveAsJSON = async (
 ) => {
   const serialized = serializeAsJSON(elements, appState, files, "local");
 
-  invoke("greet", { name: serialized }).then(
+  const filePath = await save({
+    filters: [{
+      name: 'schema',
+      extensions: ['json']
+    }]
+  });
+  invoke("greet", { name: serialized ,filepath: filePath }).then(
       (res) => {
           // console.log(res)
       }
